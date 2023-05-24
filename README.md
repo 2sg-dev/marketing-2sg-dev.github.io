@@ -1,1 +1,1 @@
-# (marketing.2sg.dev)[marketing.2sg.dev]
+https://marketing.2sg.dev/
