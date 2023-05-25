@@ -18,7 +18,7 @@
       <div class="main">
         <div class="app-info">
             <input id="nameInput" name="name" type="text" placeholder="Name" required value="My New App" />
-            <!-- <input id="sloganInput" name="slogan" type="text" placeholder="Slogan (optional)" /> -->
+            <input id="sloganInput" name="slogan" type="text" placeholder="Slogan (optional)" />
         </div>
         <div class="panels">
           <div class="config">
@@ -54,8 +54,6 @@
                 <input id="nameFontSize" type="number" name="name_font_size" step="1" min="24" max="120" value="32" />
               </span>
               </label>
-              <!-- <input id="nameFontSize" type="range" name="name_font_size" step="1" min="24" max="72" /> -->
-              
             </div>
 
             <div>
@@ -155,7 +153,7 @@
       }
 
       bindInputToURL('nameInput');
-      // bindInputToURL('sloganInput');
+      bindInputToURL('sloganInput');
 
       bindInputToURL('fontColor');
       bindInputToURL('nameFontSize');
@@ -173,7 +171,7 @@
         const fontColor = searchParams.has('font_color') ? searchParams.get('font_color') : '#000';
         const nameFontSize = searchParams.has('name_font_size') ? searchParams.get('name_font_size') : '32';
         const nameFontFamily = searchParams.has('name_font_family') ? searchParams.get('name_font_family') : 'sans-serif';
-        const bgColor = searchParams.has('bg_color') ? searchParams.get('bg_color') : 'none';
+        const bgColor = searchParams.has('bg_color') ? searchParams.get('bg_color') : '#fff';
         const borderColor = searchParams.has('border_color') ? searchParams.get('border_color') : '#000';
         const borderSize = searchParams.has('border_size') ? searchParams.get('border_size') : '5';
         const borderRadius =  searchParams.has('border_radius') ? searchParams.get('border_radius') : '5';
@@ -182,8 +180,8 @@
         <div id="container" style="display: flex; align-items: center;justify-content: center; height: 100%; width: 100%;">
           <div id="logo" style="color: ${fontColor}; background-color: ${bgColor};">
             <div id="border" style="padding: 20px 40px; margin: 20px; border: ${borderSize}px solid ${borderColor}; border-radius: ${borderRadius}px;">
-              <h1 class="${nameFontFamily}" style="font-size: ${nameFontSize}px; margin: 0px;">${logoName}</h1>
-              ${logoSlogan && `<h3>${logoSlogan}</h3>`}
+              <h1 class="${nameFontFamily}" style="font-size: ${nameFontSize}px; margin: 0px; text-align: center;">${logoName}</h1>
+              ${logoSlogan && `<h3 class="${nameFontFamily}" style="margin: 0px; text-align: center;">${logoSlogan}</h3>`}
             </div>
           </div>
         </div>`;
