@@ -1,0 +1,112 @@
+html, body {
+  color: #333;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.content {
+  margin: 50px auto;
+  width: 1200px;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+h1, h2 {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.app-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-info input {
+  color: #333;
+  border-radius: 10px;
+  border: 2px solid #eee;
+  font-size: 24px;
+  margin-top: 20px;
+  outline: none;
+  padding: 8px;
+  width: 50%;
+}
+
+.app-info input:first-child {
+  width: 35%;
+}
+
+.panels {
+  display: flex;
+  margin-top: 25px;
+}
+
+.panels .config {
+  border: 1px solid black;
+  height: 374px;
+  margin-right: 20px;
+  overflow: auto;
+  padding: 12px;
+  width: 354px;
+}
+
+.panels .config > div {
+  border-left: 1px solid black;
+  padding-left: 12px;
+}
+
+.panels .config > div > label {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0px 20px;
+}
+
+.panels .config > div > input {
+  width: 100%;
+}
+
+.panels .preview {
+  --nr: 20; /* number of rows */
+  --nc: 40; /* number of columns */
+  --b: 2px; /* border length */
+
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),
+      lightgray 90deg,#0000 0) calc(-1*var(--b)) calc(-1*var(--b))/
+      calc(100%/var(--nc)) calc(100%/var(--nr));
+
+/*  border: 1px solid black;*/
+  /*display: flex;
+  align-items: center;
+  justify-content: center;*/
+  height: 400px;
+  width: 800px;
+}
+
+.app-buttons {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-buttons > a {
+  background-color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 24px;
+  text-decoration: none;
+  padding: 4px 8px;
+}
+
+.app-buttons > a#downloadButton {
+  background-color: green;
+  color: white;
+}

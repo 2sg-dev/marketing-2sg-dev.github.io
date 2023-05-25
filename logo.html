@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="logo.css">
+  </head>
+  <body>
+    <embed type="text/html" src="menu.html" style="position: fixed; top: 0;" height="200px" width="200px" />
+    <div class="content">
+      <h1>Logo Generator</h1>
+      <div class="main">
+        <div class="app-info">
+            <input id="nameInput" name="name" type="text" placeholder="Name" required value="My New App" />
+            <!-- <input id="sloganInput" name="slogan" type="text" placeholder="Slogan (optional)" /> -->
+        </div>
+        <div class="panels">
+          <div class="config">
+            <h2>Configurator</h2>
+
+            <h3>Presets</h3>
+
+            <div>
+              <label>
+                <b>Color Schemes:</b>
+                <select>
+                  <option>None</option>
+                  <option>Redish</option>
+                  <option>Blueish</option>
+                  <option>Orangeish</option>
+                </select>
+              </label>
+            </div>
+
+            <h3>Font Settings</h3>
+
+            <div>
+              <label for="font_color">
+                <b>Font Color:</b>
+                <input type="color" id="fontColor" name="font_color" />
+              </label>
+
+            </div>
+
+            <div>
+              <label for="name_font_size">
+                <b>Font Size:</b>
+                <input id="nameFontSize" type="number" name="name_font_size" step="1" min="24" max="72" value="32" />
+              </span>
+              </label>
+              <!-- <input id="nameFontSize" type="range" name="name_font_size" step="1" min="24" max="72" /> -->
+              
+            </div>
+
+            <div>
+
+              <label for="name_font_family">
+                <b>Font Style:</b>
+                <select id="nameFontFamily" name="name_font_family">
+                  <option value="sans-serif">sans-serif</option>
+                  <option value="serif">serif</option>
+                  <option value="monospace">monospace</option>
+                  <option value="cursive">cursive</option>
+                </select>
+              </label>
+              
+            </div>
+
+            <h3>Background Settings</h3>
+
+            <div>
+              <label for="bg_color">
+                <b>Background Color:</b>
+                <input type="color" id="bgColor" name="bg_color" />
+              </label>
+
+            </div>
+
+            <h3>Border Settings</h3>
+
+            <div>
+              <label for="border_color">
+                <b>Border Color:</b>
+                <input type="color" id="borderColor" name="border_color" />
+              </label>
+
+            </div>
+
+            <div>
+              <label for="border_size">
+                <b>Border Size:</b>
+                <input id="borderSize" type="number" name="border_size" step="1" min="0" max="20" value="5" />
+              </label>
+              
+            </div>
+
+            <div></div>
+
+          </div>
+          <div class="preview">
+            <img id="previewImg" width="800px" height="400px" />
+            <!-- <div id="previewImg" /> -->
+          </div>
+        </div>
+        <div class="app-buttons">
+          <a href="#" id="downloadButton" download>Download as SVG</a>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      const downloadButton = document.getElementById('downloadButton');
+      const searchParams = new URLSearchParams(location.hash.substr(1));
+
+      function bindInputToURL(id) {
+        const element = document.getElementById(id);
+        const elementName = element.getAttribute('name');
+        const elementValuePreview = document.getElementById(elementName + '_value');
+
+        if (searchParams.has(elementName)) {
+          if (element.getAttribute('type') === 'radio') {
+            // console.log(element.value, searchParams.get(elementName))
+            if (element.value === searchParams.get(elementName)) {
+              element.setAttribute('checked', true);
+            } else {
+              element.removeAttribute('checked');
+            }
+          } else {
+            element.value = searchParams.get(elementName);
+          }
+
+          if (elementValuePreview) {
+            elementValuePreview.innerHTML = searchParams.get(elementName);
+          }
+        }
+
+        element.addEventListener('change', e => {
+          searchParams.set(elementName, e.target.value);
+          // console.log(elementName, e.target.value, searchParams.toString())
+          location.hash = searchParams.toString();
+
+          if (elementValuePreview) {
+            elementValuePreview.innerHTML = e.target.value;
+          }
+
+          renderPreview();
+        })
+      }
+
+      bindInputToURL('nameInput');
+      // bindInputToURL('sloganInput');
+
+      bindInputToURL('fontColor');
+      bindInputToURL('nameFontSize');
+
+      bindInputToURL('nameFontFamily');
+
+      bindInputToURL('bgColor');
+
+      bindInputToURL('borderColor');
+      bindInputToURL('borderSize');
+
+      function renderPreview() {
+        const logoName = searchParams.has('name') ? searchParams.get('name') : 'My New App';
+        const logoSlogan = searchParams.has('slogan') ? searchParams.get('slogan') : '';
+        const fontColor = searchParams.has('font_color') ? searchParams.get('font_color') : '#000';
+        const nameFontSize = searchParams.has('name_font_size') ? searchParams.get('name_font_size') : '32';
+        const nameFontFamily = searchParams.has('name_font_family') ? searchParams.get('name_font_family') : 'sans-serif';
+        const bgColor = searchParams.has('bg_color') ? searchParams.get('bg_color') : 'none';
+        const borderColor = searchParams.has('border_color') ? searchParams.get('border_color') : '#000';
+        const borderSize = searchParams.has('border_size') ? searchParams.get('border_size') : '5';
+        const borderRadius =  searchParams.has('border_radius') ? searchParams.get('border_radius') : '5';
+
+      const renderThisHtml = `
+        <div id="container" style="display: flex; align-items: center;justify-content: center; height: 100%; width: 100%;">
+          <div id="logo" style="color: ${fontColor}; background-color: ${bgColor};">
+            <div id="border" style="padding: 20px 40px; margin: 20px; border: ${borderSize}px solid ${borderColor}; border-radius: ${borderRadius}px;">
+              <h1 style="margin: 0; font-size: ${nameFontSize}px; font-family: ${nameFontFamily};">${logoName}</h1>
+              ${logoSlogan && `<h3>${logoSlogan}</h3>`}
+            </div>
+          </div>
+        </div>`;
+
+        // console.log(renderThisHtml)
+
+        const img = document.getElementById('previewImg');
+
+        // img.innerHTML = renderThisHtml; return;
+
+        const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="${img.width}" height="${img.height}">
+          <foreignObject width="100%" height="100%">
+            <div xmlns="http://www.w3.org/1999/xhtml" style="height: 100%;width: 100%;">
+              ${renderThisHtml}
+            </div>
+          </foreignObject>
+        </svg>`;
+
+        const svgBlob = new Blob( [svg], { type: 'image/svg+xml;charset=utf-8' } );
+        const svgObjectUrl = URL.createObjectURL( svgBlob );
+
+        const oldSrc = img.src;
+        if( oldSrc && oldSrc.startsWith( 'blob:' ) ) { // See https://stackoverflow.com/a/75848053/159145
+            URL.revokeObjectURL( oldSrc );
+        }
+
+        img.src = svgObjectUrl;
+        downloadButton.href = svgObjectUrl;
+        downloadButton.download = logoName + '.svg';
+      }
+
+      renderPreview();
+    </script>
+  </body>
+</html>
