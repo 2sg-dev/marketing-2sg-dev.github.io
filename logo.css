@@ -1,7 +1,24 @@
 html, body {
   color: #333;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
+}
+
+.cursive {
+  font-family: 'Great Vibes', cursive;
+  margin-bottom: -0.2em;
+}
+
+.sans-serif {
+  font-family: 'Roboto', sans-serif;
+}
+
+.monospace {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.serif {
+  font-family: 'Merriweather', serif;
 }
 
 .content {
@@ -19,6 +36,7 @@ html, body {
 
 h1, h2 {
   font-family: sans-serif;
+  margin: 0;
   text-align: center;
 }
 
@@ -26,16 +44,18 @@ h1, h2 {
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 25px 0;
 }
 
 .app-info input {
-  color: #333;
   border-radius: 10px;
   border: 2px solid #eee;
+  color: #333;
   font-size: 24px;
   margin-top: 20px;
   outline: none;
   padding: 8px;
+  text-align: center;
   width: 50%;
 }
 
@@ -83,9 +103,9 @@ h1, h2 {
       calc(100%/var(--nc)) calc(100%/var(--nr));
 
 /*  border: 1px solid black;*/
-  /*display: flex;
+  display: flex;
   align-items: center;
-  justify-content: center;*/
+  justify-content: center;
   height: 400px;
   width: 800px;
 }

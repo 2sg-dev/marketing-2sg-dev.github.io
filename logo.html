@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Logo Generator - Marketing Toolkit by 2sg.dev</title>
+    <meta name="description" content="Generate and configure a unique logo with our marketing toolkit. Create an outstanding image to represent your idea.">
     <link rel="stylesheet" href="logo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather&family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
   </head>
   <body>
-    <embed type="text/html" src="menu.html" style="position: fixed; top: 0;" height="200px" width="200px" />
+    <embed type="text/html" src="menu.html" style="position: fixed; top: 0;" height="200px" width="300px" />
     <div class="content">
       <h1>Logo Generator</h1>
       <div class="main">
@@ -47,7 +51,7 @@
             <div>
               <label for="name_font_size">
                 <b>Font Size:</b>
-                <input id="nameFontSize" type="number" name="name_font_size" step="1" min="24" max="72" value="32" />
+                <input id="nameFontSize" type="number" name="name_font_size" step="1" min="24" max="120" value="32" />
               </span>
               </label>
               <!-- <input id="nameFontSize" type="range" name="name_font_size" step="1" min="24" max="72" /> -->
@@ -100,8 +104,8 @@
 
           </div>
           <div class="preview">
-            <img id="previewImg" width="800px" height="400px" />
-            <!-- <div id="previewImg" /> -->
+            <!-- <img id="previewImg" width="800px" height="400px" /> -->
+            <div id="previewImg"></div>
           </div>
         </div>
         <div class="app-buttons">
@@ -176,7 +180,7 @@
         <div id="container" style="display: flex; align-items: center;justify-content: center; height: 100%; width: 100%;">
           <div id="logo" style="color: ${fontColor}; background-color: ${bgColor};">
             <div id="border" style="padding: 20px 40px; margin: 20px; border: ${borderSize}px solid ${borderColor}; border-radius: ${borderRadius}px;">
-              <h1 style="margin: 0; font-size: ${nameFontSize}px; font-family: ${nameFontFamily};">${logoName}</h1>
+              <h1 class="${nameFontFamily}" style="font-size: ${nameFontSize}px;">${logoName}</h1>
               ${logoSlogan && `<h3>${logoSlogan}</h3>`}
             </div>
           </div>
@@ -186,7 +190,7 @@
 
         const img = document.getElementById('previewImg');
 
-        // img.innerHTML = renderThisHtml; return;
+        img.innerHTML = renderThisHtml; return;
 
         const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" width="${img.width}" height="${img.height}">
