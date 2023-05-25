@@ -104,8 +104,10 @@
 
           </div>
           <div class="preview">
+            <!-- <canvas id="previewImg" width="800px" height="400px">Browser not supported.</canvas> -->
+            <object id="previewImg" type="image/svg+xml" data="" width="800px" height="400px"></object>
             <!-- <img id="previewImg" width="800px" height="400px" /> -->
-            <div id="previewImg"></div>
+            <!-- <div id="previewImg"></div> -->
           </div>
         </div>
         <div class="app-buttons">
@@ -180,7 +182,7 @@
         <div id="container" style="display: flex; align-items: center;justify-content: center; height: 100%; width: 100%;">
           <div id="logo" style="color: ${fontColor}; background-color: ${bgColor};">
             <div id="border" style="padding: 20px 40px; margin: 20px; border: ${borderSize}px solid ${borderColor}; border-radius: ${borderRadius}px;">
-              <h1 class="${nameFontFamily}" style="font-size: ${nameFontSize}px;">${logoName}</h1>
+              <h1 class="${nameFontFamily}" style="font-size: ${nameFontSize}px; margin: 0px;">${logoName}</h1>
               ${logoSlogan && `<h3>${logoSlogan}</h3>`}
             </div>
           </div>
@@ -189,13 +191,36 @@
         // console.log(renderThisHtml)
 
         const img = document.getElementById('previewImg');
+        // const ctx = img.getContext('2d');
 
-        img.innerHTML = renderThisHtml; return;
+        // img.innerHTML = renderThisHtml; return;
 
         const svg = `
         <svg xmlns="http://www.w3.org/2000/svg" width="${img.width}" height="${img.height}">
           <foreignObject width="100%" height="100%">
             <div xmlns="http://www.w3.org/1999/xhtml" style="height: 100%;width: 100%;">
+              <style>
+                @import url('https://fonts.googleapis.com/css2?family=Great+Vibes');
+                @import url('https://fonts.googleapis.com/css2?family=Merriweather');
+                @import url('https://fonts.googleapis.com/css2?family=Roboto');
+                @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono');
+
+                .cursive {
+                  font-family: 'Great Vibes', cursive;
+                }
+
+                .sans-serif {
+                  font-family: 'Roboto', sans-serif;
+                }
+
+                .monospace {
+                  font-family: 'Roboto Mono', monospace;
+                }
+
+                .serif {
+                  font-family: 'Merriweather', serif;
+                }
+              </style>
               ${renderThisHtml}
             </div>
           </foreignObject>
@@ -204,12 +229,21 @@
         const svgBlob = new Blob( [svg], { type: 'image/svg+xml;charset=utf-8' } );
         const svgObjectUrl = URL.createObjectURL( svgBlob );
 
-        const oldSrc = img.src;
+        const oldSrc = img.data;
         if( oldSrc && oldSrc.startsWith( 'blob:' ) ) { // See https://stackoverflow.com/a/75848053/159145
             URL.revokeObjectURL( oldSrc );
         }
+        img.data = svgObjectUrl;
 
-        img.src = svgObjectUrl;
+        // const tempImg = new Image();
+        // tempImg.addEventListener( 'load', function() {
+        //     ctx.drawImage( tempImg, 0, 0 );
+        //     URL.revokeObjectURL( svgObjectUrl );
+        // });
+
+        // tempImg.src = svgObjectUrl;
+
+
         downloadButton.href = svgObjectUrl;
         downloadButton.download = logoName + '.svg';
       }
