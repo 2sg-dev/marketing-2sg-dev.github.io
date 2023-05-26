@@ -29,11 +29,11 @@
             <div>
               <label>
                 <b>Color Schemes:</b>
-                <select>
-                  <option>None</option>
-                  <option>Redish</option>
-                  <option>Blueish</option>
-                  <option>Orangeish</option>
+                <select id="preset-selector">
+                  <option value="none">None</option>
+                  <option value="redish">Redish</option>
+                  <option value="blueish">Blueish</option>
+                  <option value="orangeish">Orangeish</option>
                 </select>
               </label>
             </div>
@@ -247,6 +247,30 @@
       }
 
       renderPreview();
+
+      document.getElementById('preset-selector').addEventListener('change', event => {
+        if (event.target.value === 'redish') {
+          searchParams.set('bg_color', '#570000');
+          searchParams.set('border_color', '#FFFFFF');
+          searchParams.set('font_color', '#FFFFFF'); 
+        } else if (event.target.value === 'blueish') {
+          searchParams.set('bg_color', '#1EBBD7');
+          searchParams.set('border_color', '#FFFFFF');
+          searchParams.set('font_color', '#FFFFFF'); 
+        } else if (event.target.value === 'orangeish') {
+          searchParams.set('bg_color', '#E57C23');
+          searchParams.set('border_color', '#025464');
+          searchParams.set('font_color', '#025464'); 
+        } else {
+          searchParams.delete('bg_color');
+          searchParams.delete('border_color');
+          searchParams.delete('font_color'); 
+        }
+
+        location.hash = searchParams.toString();
+
+        renderPreview();
+      });
     </script>
   </body>
 </html>
